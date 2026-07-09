@@ -100,8 +100,7 @@ const Index = () => {
             <span className="font-body text-lg tracking-[0.3em] uppercase md:text-xl">18 сентября 2026</span>
             <span className="h-px flex-1 bg-white/40" />
           </div>
-          <p className="mt-4 animate-fade-up font-body text-white/80" style={{ animationDelay: '0.3s' }}>Да Винчи
-Банкетный зал, ​Улица Кулёва, 24</p>
+          <p className="mt-4 animate-fade-up font-body text-white/80" style={{ animationDelay: '0.3s' }}>Дворец бракосочетаний г. Томска, Проспект Ленина, 83</p>
           <Button
             size="lg"
             className="mt-10 animate-fade-up rounded-full px-10 py-6 text-base shadow-xl"
