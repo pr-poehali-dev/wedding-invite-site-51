@@ -19,10 +19,29 @@ const schedule = [
 
 const gallery = [HERO_IMG, FLOWERS_IMG, VENUE_IMG];
 
+const WEDDING_DATE = new Date('2026-09-18T14:40:00');
+
+const getTimeLeft = () => {
+  const diff = WEDDING_DATE.getTime() - Date.now();
+  if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  return {
+    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+    minutes: Math.floor((diff / (1000 * 60)) % 60),
+    seconds: Math.floor((diff / 1000) % 60),
+  };
+};
+
 const Index = () => {
   const revealRefs = useRef<(HTMLElement | null)[]>([]);
   const [form, setForm] = useState({ name: '', guests: 1, menu_notes: '' });
   const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft());
+
+  useEffect(() => {
+    const timer = setInterval(() => setTimeLeft(getTimeLeft()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const submitRsvp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -250,6 +269,27 @@ const Index = () => {
               </Button>
             </form>
           )}
+        </div>
+      </section>
+
+      {/* ТАЙМЕР */}
+      <section className="bg-secondary py-20 text-center">
+        <p ref={addReveal} className="reveal font-script text-3xl text-primary">Остаётся совсем немного</p>
+        <h2 ref={addReveal} className="reveal mt-2 font-display text-4xl text-foreground md:text-5xl">
+          До нашей свадьбы
+        </h2>
+        <div ref={addReveal} className="reveal mx-auto mt-10 flex max-w-xl flex-wrap items-center justify-center gap-4 px-6">
+          {[
+            { label: 'дней', value: timeLeft.days },
+            { label: 'часов', value: timeLeft.hours },
+            { label: 'минут', value: timeLeft.minutes },
+            { label: 'секунд', value: timeLeft.seconds },
+          ].map((unit) => (
+            <div key={unit.label} className="flex h-24 w-24 flex-col items-center justify-center rounded-2xl bg-card shadow-sm md:h-28 md:w-28">
+              <span className="font-display text-4xl text-primary md:text-5xl">{String(unit.value).padStart(2, '0')}</span>
+              <span className="mt-1 font-body text-xs uppercase tracking-wide text-muted-foreground">{unit.label}</span>
+            </div>
+          ))}
         </div>
       </section>
 
