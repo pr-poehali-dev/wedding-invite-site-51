@@ -78,9 +78,7 @@ const Index = () => {
           <p className="animate-fade-in font-script text-3xl text-white/90 md:text-4xl">
             Мы женимся!
           </p>
-          <h1 className="mt-4 animate-fade-up font-display text-6xl font-500 leading-none text-white md:text-8xl lg:text-9xl">
-            Артём <span className="font-script text-primary-foreground/80">&</span> Мария
-          </h1>
+          <h1 className="mt-4 animate-fade-up font-display text-6xl font-500 leading-none text-white md:text-8xl lg:text-9xl">Павел  &  Юлия</h1>
           <div className="mx-auto mt-8 flex max-w-md animate-fade-up items-center justify-center gap-4 text-white/90" style={{ animationDelay: '0.2s' }}>
             <span className="h-px flex-1 bg-white/40" />
             <span className="font-body text-lg tracking-[0.3em] uppercase md:text-xl">12 сентября 2026</span>
