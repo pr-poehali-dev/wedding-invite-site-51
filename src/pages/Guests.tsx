@@ -48,7 +48,7 @@ const Guests = () => {
             <Icon name="ArrowLeft" size={16} />
             На главную
           </Link>
-          <span className="font-script text-2xl text-primary">Артём & Мария</span>
+          <span className="font-script text-2xl text-primary">Павел & Юлия</span>
         </div>
       </header>
 
