@@ -1,8 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Icon from '@/components/ui/icon';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+
+const RSVP_URL = 'https://functions.poehali.dev/82989529-ae01-4bdb-b2c8-431c5db4d7f3';
 
 const HERO_IMG = 'https://cdn.poehali.dev/projects/b0e4e9d1-980a-4683-8052-6fe3c101c3e2/files/ff358d91-d553-4def-8aaa-16de7fd01915.jpg';
 const FLOWERS_IMG = 'https://cdn.poehali.dev/projects/b0e4e9d1-980a-4683-8052-6fe3c101c3e2/files/399727cf-9233-403f-9787-3475cf0560b3.jpg';
@@ -21,6 +24,29 @@ const gallery = [HERO_IMG, FLOWERS_IMG, VENUE_IMG];
 
 const Index = () => {
   const revealRefs = useRef<(HTMLElement | null)[]>([]);
+  const [form, setForm] = useState({ name: '', guests: 1, menu_notes: '' });
+  const [status, setStatus] = useState<'idle' | 'loading' | 'done' | 'error'>('idle');
+
+  const submitRsvp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.name.trim()) {
+      setStatus('error');
+      return;
+    }
+    setStatus('loading');
+    try {
+      const res = await fetch(RSVP_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error();
+      setStatus('done');
+      setForm({ name: '', guests: 1, menu_notes: '' });
+    } catch {
+      setStatus('error');
+    }
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -167,28 +193,74 @@ const Index = () => {
           <p ref={addReveal} className="reveal mt-4 font-body text-primary-foreground/80">
             Пожалуйста, ответьте до 1 августа 2026 года
           </p>
-          <form
-            ref={addReveal}
-            className="reveal mt-10 space-y-4 rounded-3xl bg-card/95 p-8 text-left shadow-2xl"
-            onSubmit={(e) => e.preventDefault()}
-          >
-            <div>
-              <label className="mb-1 block font-body text-sm font-500 text-foreground">Ваше имя</label>
-              <Input placeholder="Имя и фамилия" className="bg-background" />
+          {status === 'done' ? (
+            <div ref={addReveal} className="reveal mt-10 rounded-3xl bg-card/95 p-10 text-center shadow-2xl">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                <Icon name="Check" size={32} />
+              </div>
+              <h3 className="mt-6 font-display text-3xl text-foreground">Спасибо!</h3>
+              <p className="mt-2 font-body text-muted-foreground">
+                Ваш ответ сохранён. Будем очень рады видеть вас на нашем празднике!
+              </p>
+              <Button
+                variant="outline"
+                className="mt-6 rounded-full"
+                onClick={() => setStatus('idle')}
+              >
+                Отправить ещё один ответ
+              </Button>
             </div>
-            <div>
-              <label className="mb-1 block font-body text-sm font-500 text-foreground">Количество гостей</label>
-              <Input type="number" min={1} defaultValue={1} className="bg-background" />
-            </div>
-            <div>
-              <label className="mb-1 block font-body text-sm font-500 text-foreground">Пожелания по меню</label>
-              <Textarea placeholder="Аллергии, предпочтения..." className="bg-background" rows={3} />
-            </div>
-            <Button type="submit" size="lg" className="w-full rounded-full py-6 text-base">
-              <Icon name="Send" size={18} className="mr-2" />
-              Отправить ответ
-            </Button>
-          </form>
+          ) : (
+            <form
+              ref={addReveal}
+              className="reveal mt-10 space-y-4 rounded-3xl bg-card/95 p-8 text-left shadow-2xl"
+              onSubmit={submitRsvp}
+            >
+              <div>
+                <label className="mb-1 block font-body text-sm font-500 text-foreground">Ваше имя</label>
+                <Input
+                  placeholder="Имя и фамилия"
+                  className="bg-background"
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                />
+              </div>
+              <div>
+                <label className="mb-1 block font-body text-sm font-500 text-foreground">Количество гостей</label>
+                <Input
+                  type="number"
+                  min={1}
+                  className="bg-background"
+                  value={form.guests}
+                  onChange={(e) => setForm({ ...form, guests: Math.max(1, Number(e.target.value)) })}
+                />
+              </div>
+              <div>
+                <label className="mb-1 block font-body text-sm font-500 text-foreground">Пожелания по меню</label>
+                <Textarea
+                  placeholder="Аллергии, предпочтения..."
+                  className="bg-background"
+                  rows={3}
+                  value={form.menu_notes}
+                  onChange={(e) => setForm({ ...form, menu_notes: e.target.value })}
+                />
+              </div>
+              {status === 'error' && (
+                <p className="font-body text-sm text-destructive">
+                  Не удалось отправить. Проверьте имя и попробуйте ещё раз.
+                </p>
+              )}
+              <Button
+                type="submit"
+                size="lg"
+                className="w-full rounded-full py-6 text-base"
+                disabled={status === 'loading'}
+              >
+                <Icon name={status === 'loading' ? 'Loader2' : 'Send'} size={18} className={`mr-2 ${status === 'loading' ? 'animate-spin' : ''}`} />
+                {status === 'loading' ? 'Отправляем...' : 'Отправить ответ'}
+              </Button>
+            </form>
+          )}
         </div>
       </section>
 
@@ -201,6 +273,13 @@ const Index = () => {
           <Icon name="MapPin" size={16} />
           <span className="font-body text-sm">Загородный клуб «Сосновый берег»</span>
         </div>
+        <Link
+          to="/guests"
+          className="mt-8 inline-flex items-center gap-2 font-body text-xs text-background/40 transition-colors hover:text-background/80"
+        >
+          <Icon name="ClipboardList" size={14} />
+          Список гостей
+        </Link>
       </footer>
     </div>
   );

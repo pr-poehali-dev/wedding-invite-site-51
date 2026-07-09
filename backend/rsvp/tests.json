@@ -1,0 +1,19 @@
+{
+  "tests": [
+    {
+      "name": "Список гостей доступен",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Добавление ответа гостя",
+      "method": "POST",
+      "path": "/",
+      "body": {"name": "Тестовый Гость", "guests": 2, "menu_notes": "без орехов"},
+      "expectedStatus": 200,
+      "expectedBody": {"ok": true},
+      "bodyMatcher": "partial"
+    }
+  ]
+}
