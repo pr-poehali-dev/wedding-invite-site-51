@@ -12,12 +12,9 @@ const FLOWERS_IMG = 'https://cdn.poehali.dev/projects/b0e4e9d1-980a-4683-8052-6f
 const VENUE_IMG = 'https://cdn.poehali.dev/projects/b0e4e9d1-980a-4683-8052-6fe3c101c3e2/files/23a375b3-d64b-40de-9fda-0cc300b529bc.jpg';
 
 const schedule = [
-  { time: '14:00', title: 'Сбор гостей', icon: 'Users', desc: 'Welcome-зона, лёгкие закуски и фотозона' },
-  { time: '15:00', title: 'Церемония', icon: 'Heart', desc: 'Самый трогательный момент нашего дня' },
-  { time: '16:00', title: 'Фуршет', icon: 'Wine', desc: 'Бокал игристого и поздравления' },
-  { time: '18:00', title: 'Банкет', icon: 'UtensilsCrossed', desc: 'Праздничный ужин и тёплые слова' },
-  { time: '21:00', title: 'Первый танец', icon: 'Music', desc: 'Танцы до утра под живую музыку' },
-  { time: '23:00', title: 'Торт и салют', icon: 'Sparkles', desc: 'Сладкий финал нашего вечера' },
+  { time: '14:40', title: 'Церемония бракосочетания', icon: 'Heart', desc: 'Дворец бракосочетаний г. Томска, Проспект Ленина, 83' },
+  { time: '18:00', title: 'Сбор гостей', icon: 'Users', desc: 'Празднование свадьбы в «Да Винчи», банкетный зал, ул. Кулёва, 24' },
+  { time: '00:00', title: 'Завершение мероприятия', icon: 'Sparkles', desc: 'Спасибо, что были с нами в этот день!' },
 ];
 
 const gallery = [HERO_IMG, FLOWERS_IMG, VENUE_IMG];
