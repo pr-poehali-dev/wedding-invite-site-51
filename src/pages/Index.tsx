@@ -197,9 +197,7 @@ const Index = () => {
           <h2 ref={addReveal} className="reveal mt-2 font-display text-5xl md:text-6xl">
             Подтвердите присутствие
           </h2>
-          <p ref={addReveal} className="reveal mt-4 font-body text-primary-foreground/80">
-            Пожалуйста, ответьте до 1 августа 2026 года
-          </p>
+          <p ref={addReveal} className="reveal mt-4 font-body text-primary-foreground/80">Пожалуйста, ответьте до 1 августа 2026 года</p>
           {status === 'done' ? (
             <div ref={addReveal} className="reveal mt-10 rounded-3xl bg-card/95 p-10 text-center shadow-2xl">
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary text-primary-foreground">
@@ -243,7 +241,7 @@ const Index = () => {
                 />
               </div>
               <div>
-                <label className="mb-1 block font-body text-sm font-500 text-foreground">Пожелания по меню</label>
+                <label className="mb-1 block font-body text-sm font-500 text-foreground">Пожелания по алкоголю</label>
                 <Textarea
                   placeholder="Аллергии, предпочтения..."
                   className="bg-background"
