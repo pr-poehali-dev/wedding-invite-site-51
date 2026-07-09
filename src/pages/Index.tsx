@@ -106,12 +106,7 @@ const Index = () => {
         <h2 ref={addReveal} className="reveal mt-2 font-display text-5xl text-foreground md:text-6xl">
           Как всё началось
         </h2>
-        <p ref={addReveal} className="reveal mx-auto mt-8 max-w-2xl font-body text-lg leading-relaxed text-muted-foreground text-balance">
-          Пять лет назад мы случайно оказались за одним столиком в маленькой кофейне.
-          Один разговор растянулся на целую ночь — и с тех пор мы не расстаёмся.
-          Через путешествия, мечты и тысячи общих рассветов мы пришли к самому
-          важному дню. И хотим встретить его рядом с вами.
-        </p>
+        <p ref={addReveal} className="reveal mx-auto mt-8 max-w-2xl font-body text-lg leading-relaxed text-muted-foreground text-balance">Два года назад мы случайно оказались рядом возле маленького ресторанчика. Несколько слов разговора , переписка, встреча, свидание — и с тех пор мы не расстаёмся. Через путешествия, мечты и тысячи общих моментов мы пришли к самому важному дню. И хотим встретить его рядом с вами.</p>
         <div ref={addReveal} className="reveal mt-10 flex items-center justify-center gap-3 text-primary">
           <Icon name="Heart" size={20} />
           <span className="font-script text-2xl">Павел & Юлия</span>
