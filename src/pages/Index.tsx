@@ -256,11 +256,11 @@ const Index = () => {
       {/* ФУТЕР */}
       <footer className="bg-foreground py-16 text-center text-background">
         <Icon name="Heart" size={28} className="mx-auto text-primary" />
-        <h3 className="mt-4 font-display text-4xl">Артём & Мария</h3>
+        <h3 className="mt-4 font-display text-4xl">Павел & Юлия</h3>
         <p className="mt-2 font-script text-2xl text-background/70">До встречи на празднике!</p>
         <div className="mx-auto mt-6 flex max-w-xs items-center justify-center gap-2 text-background/60">
           <Icon name="MapPin" size={16} />
-          <span className="font-body text-sm">Загородный клуб «Сосновый берег»</span>
+          <span className="font-body text-sm">«Да Винчи», ул. Кулёва, 24</span>
         </div>
         <Link
           to="/guests"
