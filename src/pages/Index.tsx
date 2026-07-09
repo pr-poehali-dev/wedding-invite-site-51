@@ -114,7 +114,7 @@ const Index = () => {
         </p>
         <div ref={addReveal} className="reveal mt-10 flex items-center justify-center gap-3 text-primary">
           <Icon name="Heart" size={20} />
-          <span className="font-script text-2xl">Артём & Мария</span>
+          <span className="font-script text-2xl">Павел & Юлия</span>
           <Icon name="Heart" size={20} />
         </div>
       </section>
